@@ -75,8 +75,8 @@
 <br>
 
 
--[[#113](https://github.com/woowacourse/javascript-lotto/pull/113#discussion_r814420062) - css 주석] 주석을 작성하여 어디에 사용되는 css인지 파악할 수 있도록 작성할 수도 있다는 것을 알게되었습니다.
+- [[#113](https://github.com/woowacourse/javascript-lotto/pull/113#discussion_r814420062) - css 주석] 주석을 작성하여 어디에 사용되는 css인지 파악할 수 있도록 작성할 수도 있다는 것을 알게되었습니다.
 
--[[#116](https://github.com/woowacourse/javascript-lotto/pull/116#discussion_r815274010) - css 세팅] css 초기화를 위해 reset.css가 아니라 normalize.css도 존재한다는 것을 알게되었습니다.
+- [[#116](https://github.com/woowacourse/javascript-lotto/pull/116#discussion_r815274010) - css 세팅] css 초기화를 위해 reset.css가 아니라 normalize.css도 존재한다는 것을 알게되었습니다.
 
 
