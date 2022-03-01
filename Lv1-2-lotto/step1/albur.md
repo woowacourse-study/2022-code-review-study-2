@@ -1,4 +1,4 @@
-# Level-2 로또 Step1(81, 82, 87, 90, 112, 113, 116, 119) - 작성자닉네임
+# Level-2 로또 Step1(81, 82, 87, 90, 112, 113, 116, 119) - 
 - 분석 담당 코드
     - [#81](https://github.com/woowacourse/javascript-lotto/pull/81)
     - [#82](https://github.com/woowacourse/javascript-lotto/pull/82)
