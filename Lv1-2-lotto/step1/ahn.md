@@ -1,4 +1,4 @@
-### Level-1 lotto Step1(114, 105, 95, 94, 93, 98, 88, 91) - 안
+## 🎯 Level-1 lotto Step1(114, 105, 95, 94, 93, 98, 88, 91) - 안
 
 - 분석 담당 코드
 
@@ -14,26 +14,30 @@
   - [#88](https://github.com/woowacourse/javascript-lotto/pull/88) 블링
   - [#91](https://github.com/woowacourse/javascript-lotto/pull/91) 태태
 
-### 아키텍처 분석
-
-- [#114 안](https://github.com/woowacourse/javascript-lotto/pull/114)
+## 🗂 아키텍처 분석
+[#114 안](https://github.com/woowacourse/javascript-lotto/pull/114)
 - 처음 제출한 내용
   - controller
     1. 이벤트를 받는다
     2. 유효성 검사
     3. 모델에서 로또 번호 생성
-    4. 랜더링 하라고 view 한테 지시
+    4. 뷰에서 랜더링 메소드 호출
   - model
     - 로또 번호 생성
     - 로또 번호 리스트 관리
-  - view - attribute 속성 제어 - 랜더링
-    이처럼 controller 에게 몰빵을 했다. 피드백을 받고 이벤트 처리는 view 가 해야 한다는 걸 깨닫고
-    다시 수정을 하였으나 이번에는 view 에게 몰빵... 억지로 컨트롤러 한테 배분을 하는 느낌이 들어 이번step2에는 모델과 뷰로만 구현을 할려고 한다.
+  - view 
+    - attribute 속성 제어 
+    - 랜더링
 
-### 피드백 정리
+이처럼 컨트롤러가 일을 다하고 있다. <br>
+이렇게되면 컨트롤러가 뷰에게 적극적으로 개입을 하게 되므로 이벤트 처리는 view 가 해야 하는 것이 맞다!! <br>
+그럼 컨트롤러는 어떤 메소드를 분리 해야 하는가에 대한 어려움이 있다. 억지로 컨트롤러 한테 메소드를 만드는 느낌이라 일단 뷰와 모델로만 구현을 하고 더 생각해볼려고 한다
+
+## ✅ 피드백 정리
 
 - [역할 분리](https://github.com/woowacourse/javascript-lotto/pull/114#discussion_r814525324)
   셀렉터를 상수로 담는 것에 어떤 가치가 있는가? 전체 프로젝트에서 한군데에서만 사용한다면 그곳에서만 사용하면 되고, 두군데 이상에서 사용한다면 그건 역할분리가 제대로 안되었다는 뜻
+<br>
 
 - [constructor 호출](https://github.com/woowacourse/javascript-lotto/pull/114#discussion_r814526816)
   인스턴스화하고 bindEvents를 호출하는 명령이 반드시 순차적으로 일어나는 거라면,
@@ -53,7 +57,7 @@ constructor() {
 }
 ```
 
-- [로또 번호 생성](https://github.com/woowacourse/javascript-lotto/pull/114#discussion_r814528467) 1~45 숫자를 섞고 0~5 인덱스 배열을 가져온다.
+- [로또 번호 생성](https://github.com/woowacourse/javascript-lotto/pull/114#discussion_r814528467) 1 ~ 45 숫자를 섞고 0 ~ 5 인덱스 배열을 가져온다.
   대부분 while 문을 사용해서 구현을 하였다. 아키텍처 리팩토링도 중요하지만, 하나의 기능도 중요하다!!
   더 좋은 방법이 없는지 생각해본다
 
@@ -64,7 +68,9 @@ constructor() {
   ```
 
 - [html/class-name](https://github.com/woowacourse/javascript-lotto/pull/93#discussion_r815450624) label 과checkbox input 을 감싸는 친구를 `wrapper` 라 보고, form 과 같이 여러 컴포넌트 (여러 단위의 element) 를 감싸는 친구를 `container` 라고 봅니다
+<br>
 
 - [test code](https://github.com/woowacourse/javascript-lotto/pull/98#discussion_r814772262) 테스트코드가 있으면 테스트코드를 먼저 보면서 구현한 내용을 파악하는 편이고, 테스트코드 === 명세라고도 생각할 수 있기 때문에 테스트코드는 정확해야 한다
+<br>
 
 - [html 강의](https://github.com/woowacourse/javascript-lotto/pull/88#discussion_r815314518) 초보자를 위한 HTML 기초 조은 개발자님이 공식문서 스펙을 기준으로 하는 만든 강의이니 시간나실때 한번 듣는걸 추천합니다
