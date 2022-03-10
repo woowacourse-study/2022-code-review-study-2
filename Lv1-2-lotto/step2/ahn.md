@@ -14,13 +14,6 @@
   - [#88](https://github.com/woowacourse/javascript-lotto/pull/88) 블링 o
   - [#91](https://github.com/woowacourse/javascript-lotto/pull/91) 태태 o
 
-## 🚀 로또 미션 회고
-
-- 커스텀 이벤트를 공부해 봐야겠다
-- 바닐라 js가 제일 중요하다!!!
-- 요구사항을 다했다고 끝이 아니라 -> 지속적인 리팩토링!
-- 정답은 없다. '무조건 ~하면 안된다' 가 아니라 때론 사용할 필요가 있기 때문에 이유가 있으면 사용한다!
-
 ## ✅ 피드백 정리
 
 - [[#114 - 유효성 검사]](https://github.com/woowacourse/javascript-lotto/pull/153#discussion_r820127380)
@@ -60,10 +53,10 @@ this.#ResultModalView.renderProfitRage(profitRate);
 ```
 
 - [[git 브랜치 배우기]](https://learngitbranching.js.org/?locale=ko)
-  작은 단위를 커밋하는 습관 기르기!
+  ⬅️ 사이트 - 작은 단위를 커밋하는 습관 기르기!
 
 - [[#124 - switch문]](https://github.com/woowacourse/javascript-lotto/pull/124#discussion_r820046647)
-  case 3, case 4 이런식으로 하는게 먼가 어색해서 나는 if문으로 작성하였다.
+  case 3, case 4 이런식으로 하는게 먼가 어색해서 나는 if문으로 작성하였다.<br>
   if문은 한눈에 count === 3 으로 확인이 가능하다.
 
 ```js
@@ -135,3 +128,11 @@ if (winningInput.value.length >= LOTTO_NUMBER.DIGIT_MAX) 를 가장 밖으로 �
 내부에 if (nextElementSibling) else 형태로 가는게 더 깔끔하지 않을까요?
 뎁스를 깊게하지 않으려고 고민을 많이 한 흔적인데요!
 나름 깊은것도 괜찮을때가 있답니다!
+
+
+## 🚀 로또 미션 회고
+
+- 커스텀 이벤트를 공부해 봐야겠다
+- 바닐라 js가 제일 중요하다!!!
+- 요구사항을 다했다고 끝이 아니라 -> 지속적인 리팩토링!
+- 정답은 없다. '무조건 ~하면 안된다' 가 아니라 때론 사용할 필요가 있기 때문에 이유가 있으면 사용한다!
