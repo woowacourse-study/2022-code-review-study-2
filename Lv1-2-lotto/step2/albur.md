@@ -46,7 +46,9 @@
 	const result = totalWinningCount(lottoList.getPurchasedLotto(), winningNumber, bonusNumber);	
 	```
 
-	`totalWinningXXX 앞에 get 이라는 이름을 붙여 함수라는 사실을 알기 쉽게 해주면 좋겠고, result ...보단 좀 더 명확한 네이밍을 가지면 좋겠어요ㅎㅎ`
+	>totalWinningXXX 앞에 get 이라는 이름을 붙여 함수라는 사실을 알기 쉽게 해주면 좋겠고, result ...보단 좀 더 명확한 네이밍을 가지면 좋겠어요ㅎㅎ
+	
+	함수와 변수에 대한 네이밍에 대한 기본 철학이어서 가져왔습니다.
 	
 
 
@@ -55,7 +57,7 @@
 
 - [[#141](https://github.com/woowacourse/javascript-lotto/pull/141#discussion_r820197575) - css]
 
-	- css에서 수치를 표현할 때 1px 이하로는 표현을 못한다고 한다!
+	- css에서 수치를 표현할 때 1px 이하로는 표현을 못한다고 한다! 새로 알게 된 사실😀
 
 
 <br>
