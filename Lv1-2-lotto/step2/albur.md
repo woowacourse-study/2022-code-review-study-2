@@ -36,7 +36,7 @@
 	```javascript
 	const result = [0, 0, 0, 0, 0];
 	```
-	위처럼 단순히 인덱스로 순위를 유추하는 것보다는 {first, second: 0, ... } 와 같이 객체를 사용하는 것이 사용하거나 읽을 때도 명확하게 순위까지 알 수 있지 않을까
+	위처럼 단순히 인덱스로 순위를 유추하는 것보다는 {first, second: 0, ... } 와 같이 객체를 사용하는 것이 사용하거나 읽을 때도 명확하게 순위까지 알 수 있을 것 같다.
 
 <br>
 
@@ -46,13 +46,16 @@
 	const result = totalWinningCount(lottoList.getPurchasedLotto(), winningNumber, bonusNumber);	
 	```
 
-	totalWinningXXX 앞에 get 이라는 이름을 붙여 함수라는 사실을 알기 쉽게 해주면 좋겠고, result ...보단 좀 더 명확한 네이밍을 가지면 좋겠어요ㅎㅎ
+	`totalWinningXXX 앞에 get 이라는 이름을 붙여 함수라는 사실을 알기 쉽게 해주면 좋겠고, result ...보단 좀 더 명확한 네이밍을 가지면 좋겠어요ㅎㅎ`
+	
+
+
 
 <br>
 
 - [[#141](https://github.com/woowacourse/javascript-lotto/pull/141#discussion_r820197575) - css]
 
-	- css에서 수치를 표현할 때 1px 이하로는 표현을 못한다고 한다.
+	- css에서 수치를 표현할 때 1px 이하로는 표현을 못한다고 한다!
 
 
 <br>
