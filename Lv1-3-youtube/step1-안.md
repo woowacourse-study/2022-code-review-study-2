@@ -18,16 +18,76 @@
   - [#91](https://github.com/woowacourse/javascript-youtube-classroom/pull/91) 나인
   - [#102](https://github.com/woowacourse/javascript-youtube-classroom/pull/102) 밧드
 
+## 📝 코드 분석
+
+#### 검색을 하고 스크롤을 내린 뒤 재검색시 자동으로 맨 위로 올라간다!
+
+```js
+export const scrollToTop = (element = document.querySelector("body")) => {
+  element.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+```
+
+#### url 입력
+
+search 속성의 매개변수 각각에 접근할 수 있는 URLSearchParams 객체입니다.
+url을 간편하게 다룰 수 있도록 URL객체가 마련되어 있다. 이것을 사용하면 프로토콜, 파라미터, 호스트 네임 변경과 같은 작업을 편하게 할 수 있다.
+
+```js
+const url = new URL(REDIRECT_SERVER_HOST);
+
+const parameters = new URLSearchParams({
+  part: "snippet",
+  type: "video",
+  maxResults: ITEMS_PER_REQUEST,
+  regionCode: "kr",
+  safeSearch: "strict",
+  pageToken: nextPageToken,
+  q: searchKeyword,
+});
+
+url.search = parameters.toString();
+```
+
+#### throttle
+
+스크롤 이벤트 발생시 throttl을 호출하고 콜백함수로 `this.#onScrollVideoList` 넘겨준다
+
+```js
+this.#videoList.addEventListener(
+  "scroll",
+  throttle(this.#onScrollVideoList, DELAY_TIME)
+);
+
+export const throttle = (callback, delayTime) => {
+  let timerId;
+
+  return () => {
+    if (timerId) return;
+
+    timerId = setTimeout(() => {
+      timerId = null;
+      callback();
+    }, delayTime);
+  };
+};
+```
+
 ## ✅ 피드백 정리
 
-- [#80](https://github.com/woowacourse/javascript-youtube-classroom/pull/80#issuecomment-1065912476)
-  검색이 완료되었을 때, 기존 검색어가 지워지고 영상이 노출되는데 검색어를 그대로 남겨놓는 건 어떻게 생각하세요?
+#### [#80](https://github.com/woowacourse/javascript-youtube-classroom/pull/80#issuecomment-1065912476)
+
+검색이 완료되었을 때, 기존 검색어가 지워지고 영상이 노출되는데 검색어를 그대로 남겨놓는 건 어떻게 생각하세요?
 
 다른 미션을 할 때에는 input value를 지워 주는게 사용자 입장에서 더 좋다고 생각하였는데,
 유튜브 검색에서는 검색어를 남겨주는게 더 맞다고 생각됩니다.
 
-- [#98](https://github.com/woowacourse/javascript-youtube-classroom/pull/98#pullrequestreview-908107500)
-  ⭐️ 테스트코드를 잘 작성해주신 덕분에 코드 파악하기가 완전 수월했습니다.
+#### [#98](https://github.com/woowacourse/javascript-youtube-classroom/pull/98#pullrequestreview-908107500)
+
+⭐️ 테스트코드를 잘 작성해주신 덕분에 코드 파악하기가 완전 수월했습니다.
 
 이런식으로 테스트를 잘게 나누어서 작성할 수 있다. 되는 경우와 안되는 경우 둘다 테스트 한다
 짧게 작성해도 아무 문제 없다!
@@ -78,7 +138,6 @@ test("응답받은 날짜 데이터를 정해진 형식(YYYY년 M월 D일)으로
   저와 페어의 고민은 여기까지 였습니다!
   근데, 혹시 저희가 생각하는 방향이 잘못되진 않았는지 궁금해서 월터님께도 여쭤봤던거에요!
   보통은 어떤식으로 접근해서 구조를 잡아나가는게 좋은지에 대한...?? 순수한 궁금증이랄까요.... 🥲 <br>
-- (먼저 생각한대로 해보고 느낀 문제점을 파악했다!!)
 
 - 리뷰어 : 지금쯤이면 꼬재님도 "정답은 없다." 라는 사실을 알고 계실 것 같아요 ㅋㅋㅋㅋ,
   저는 개인적으로 도메인과 UI를 분리하자를 초점을 잡고 분리하였고 util과 dom 관련된 요소들을 분리해서 관리하자 라는 컨셉을 잡고 프로젝트를 진행한 점이 매우 좋았습니다. 사실 구조/코드에는 정답이 없기 때문에 여러 시도를 해봐야한다고 생각을 하거든요. 말씀주신 것처럼 이런 컨셉으로 진행을 했더니 "YoutubeApp 이 하는 일이 너무 많아진 거 같다." 라는 고민을 하고 개선을 해야겠다고 생각을 하셨구용. 매우 긍정적인 방향인 거 같아요 :) <br>
