@@ -53,7 +53,7 @@ constructor() {
 }
 ```
 
-- [로또 번호 생성](https://github.com/woowacourse/javascript-lotto/pull/114#discussion_r814528467) 1 ~ 45 숫자를 섞고 0 ~ 5 인덱스 배열을 가져온다.
+- [로또 번호 생성](https://github.com/woowacourse/javascript-lotto/pull/114#discussion_r814528467) 1~45 숫자를 섞고 0~5 인덱스 배열을 가져온다.
   대부분 while 문을 사용해서 구현을 하였다. 아키텍처 리팩토링도 중요하지만, 하나의 기능도 중요하다!!
   더 좋은 방법이 없는지 생각해본다
 
