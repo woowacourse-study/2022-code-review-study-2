@@ -12,9 +12,67 @@
   - [#111](https://github.com/woowacourse/javascript-youtube-classroom/pull/111)
   - [#112](https://github.com/woowacourse/javascript-youtube-classroom/pull/112)
 
-## 아키텍처 분석(desc: 담당한 1개의 소프트웨어의 아키텍처를 간단히 분석하고 설명합니다)
+## 아키텍처 분석(desc: 담당한 1개의 소프트웨어의 아키텍처를 간단히 분석하고 설명합니다.
+
+[#112 - 싱글톤](https://github.com/woowacourse/javascript-youtube-classroom/pull/101)
+
+#### 싱글톤이란?
+
+- 하나만 생성해야할 객체를 위한 패턴
+
+#### 예시
+
+```javascript
+// videoStore
+class VideoStore {
+static _instance = null;
+
+static get instance() {
+  if (!VideoStore._instance) {
+    VideoStore._instance = new VideoStore();
+  }
+  return VideoStore._instance;
+}
+```
+
+```javascript
+// VideoItem
+class VideoItem extends CustomElement {
+  render() {
+    const video = VideoStore.instance.findVideo(this.dataset.id);
+
+    this.innerHTML = this.template(video);
+    Save.instance.subscribeEvents(this);
+  }
+```
 
 <br>
+
+#### 장점
+
+- 여러 UI 클래스들에서 공용으로 사용되는 클래스를 싱글톤 패턴으로 구현하게 되면 하나의 인스턴스만으로 사용가능해진다.
+
+<br>
+
+- 여러 인스턴스가 만들어지지 않기 때문에 디버깅하기도 쉽다.
+
+<br>
+
+- 인스턴스가 하나만 생성되기 때문에 메모리적으로 낭비가 적다.
+
+<br>
+
+#### 조심해야할 부분
+
+- 싱글톤 패턴의 클래스는 전역에서 접근이 가능하기 때문에 되도록이면 상태값을 갖지 않는게 좋다
+
+```
+B클래스는 싱글톤 상태 변수의 값에 따라 하는 일이 결정되는데, 그 싱글톤의 상태 변수는 모든 클래스에서 값을 바꿀 수 있습니다.  그래서 B클래스에서 어떤 일이 수행될지를 확인하기 위해서는 싱글톤의 상태 변수를 변화시키는 모든 코드를 살펴봐야합니다.
+
+싱글톤은 너무나도 자유로운 클래스이기에 어디에서 값이 어떻게 바뀌었는지 정확히 추측해내기가 쉽지 않습니다.
+
+https://donxu.tistory.com/entry/%EC%8B%B1%EA%B8%80%ED%86%A4%EA%B3%BC-%EC%83%81%ED%83%9C-%EA%B0%92
+```
 
 ## 피드백 정리
 
