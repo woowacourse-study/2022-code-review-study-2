@@ -92,3 +92,24 @@
 ```
 
 <br>
+
+-[[#146](https://github.com/woowacourse/javascript-youtube-classroom/pull/146#discussion_r830631461) - for attribute]
+
+for 라는 attribute는 label, output 태그에만 붙는 전용속성입니다. javascript에서 활용하고자 한다면 다른 속성 (id, class, dataset)을 사용하세요.
+
+<br>
+
+-[[#146](https://ko.javascript.info/dom-attributes-and-properties#ref-1789) - attribute]
+
+attribute는 '고유속성'에 가까운 정적인 개념이라고 생각하시면 좋을것 같아요.
+동적으로 변하는 '상태'에는 적합하지 않습니다.
+
+<br>
+
+- [[#146](https://github.com/woowacourse/javascript-youtube-classroom/pull/146#discussion_r831112399) - 무한스크롤 쓰로틀 시간]
+
+  ```
+  '약간의 브레이크'라는게 과연 충분한지를 확신할 수 있는지가 관건이에요. 데이터 응답 시간은 그때그때 다를테고, 그에따라 화면에 렌더링이 이뤄지는 시간도 그때그때 다를건데, 예를 들어 데이터 응답이 1초가 걸리는 상황이라면, 0.8초만에 다시 스크롤요청을 하게 되면 연속해서 2개의 페이지를 받게 되겠죠. 브레이크를 건다는 아이디어 자체는 훌륭합니다만, 서버 및 네트워크 환경에 따라 달라질 수 있는 '시간'을 임의로 0.8초로 지정한 것이 문제라는 거예요. `그보다는 응답이 올 때까지 홀딩한다거나, 다음 리스트가 화면에 렌더링될때까지 기다린다는 식이 되어야 하지 않을까요?`
+  ```
+
+  임의의 시간을 정해놓고 한 번의 네트워크 통신이 이뤄지도록 구현한 것이지만, 사실 임의의 시간안에 요청이 오지 않는다면, 요청이 오지 않은 상태에서 하나의 추가적인 요청을 다시 보내게 됨으로써 원하는 바를 구현할 수가 없다.
