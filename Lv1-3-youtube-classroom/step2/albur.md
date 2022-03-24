@@ -81,7 +81,7 @@
 
 <br>
 
--[[#139](https://github.com/woowacourse/javascript-youtube-classroom/pull/139#discussion_r830580284) - jest 테스트시 cypress ignore]
+- [[#139](https://github.com/woowacourse/javascript-youtube-classroom/pull/139#discussion_r830580284) - jest 테스트시 cypress ignore]
 
 ```json
   "jest": {
@@ -93,13 +93,13 @@
 
 <br>
 
--[[#146](https://github.com/woowacourse/javascript-youtube-classroom/pull/146#discussion_r830631461) - for attribute]
+- [[#146](https://github.com/woowacourse/javascript-youtube-classroom/pull/146#discussion_r830631461) - for attribute]
 
 for 라는 attribute는 label, output 태그에만 붙는 전용속성입니다. javascript에서 활용하고자 한다면 다른 속성 (id, class, dataset)을 사용하세요.
 
 <br>
 
--[[#146](https://ko.javascript.info/dom-attributes-and-properties#ref-1789) - attribute]
+- [[#146](https://ko.javascript.info/dom-attributes-and-properties#ref-1789) - attribute]
 
 attribute는 '고유속성'에 가까운 정적인 개념이라고 생각하시면 좋을것 같아요.
 동적으로 변하는 '상태'에는 적합하지 않습니다.
