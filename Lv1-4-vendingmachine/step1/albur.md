@@ -3,37 +3,104 @@
 - 분석 담당 코드
 
   - [#7](https://github.com/woowacourse/javascript-vendingmachine/pull/7)
+  - [#32](https://github.com/woowacourse/javascript-vendingmachine/pull/32)
+
   - [#8](https://github.com/woowacourse/javascript-vendingmachine/pull/8)
   - [#11](https://github.com/woowacourse/javascript-vendingmachine/pull/11)
+
   - [#19](https://github.com/woowacourse/javascript-vendingmachine/pull/19)
   - [#27](https://github.com/woowacourse/javascript-vendingmachine/pull/27)
-  - [#32](https://github.com/woowacourse/javascript-vendingmachine/pull/32)
+
   - [#38](https://github.com/woowacourse/javascript-vendingmachine/pull/38)
   - [#40](https://github.com/woowacourse/javascript-vendingmachine/pull/40)
 
 ## 다른 크루들 코드 분석
 
-### UI를 어떻게 나누었는지 (컴포넌트 - O vs X)
+#### UI를 어떻게 나누었는지 (컴포넌트 - O vs X)
 
-### 상품 각각 CRUD시 리렌더링 방식? (전체 or 부분)
+- HTMLElment를 상속하는 CustomElement를 만들어주고 이를 상속하는 `상품관리탭`과 `잔돈충전탭`으로 UI를 나누어줌
 
-### validation (UI에서? or Domain에서?)
+- `상품관리탭`과 `잔돈충전탭`으로 나누고 각 탭 내부를 세부적인 컴포넌트로 나누어줌
 
-### 데이터 바인딩을 다들 어떻게 구현하셨는지 (양방향 vs 단방향)
+- `메뉴탭`과 `상품관리탭`과 `잔돈충전탭`으로 나누어줌
 
-### css 어떻게 적용했을까? 공통 css부분?
+<br>
 
-### 상수화 네이밍
+#### UI와 도메인 분리를 어떻게 했는지?
 
-### ux 고려한 부분?
+- `상품CRUD`과 `잔돈CR`을 도메인으로 하고 나머지는 UI로 분리
 
-### 자바스크립트 엔진 콜 스택, 메모리 힙의 데이터 저장 구조
+- `UI`와 `도메인`을 따로 분리하지 않고 `탭별`로 관리
+
+- `UI`와 `도메인`를 분리한 것처럼 보이지만 `addEventlistener` 같은 로직이 `도메인` 파일에서 진행됨
+  `flux 패턴`을 사용하여 `store와 reducer`를 활용해 `도메인` 구현
+
+<br>
+
+#### 상품 각각 CRUD시 리렌더링 방식? (전체 or 부분)
+
+- `상품 추가`와 `상품 삭제`시 해당되는 상품만 리렌더링해주는 방식
+
+  ```javascript
+  insertItem(product: Product) {
+    $('tbody', this).insertAdjacentHTML(
+      'beforeend',
+      `<tr class="product-item" data-product-name="${product.name}" data-product-id="${product.id}">
+          <td>${product.name}</td>
+          <td>${markUnit(product.price)}</td>
+          <td>${product.quantity}</td>
+          <td class="product-item__button">
+            <button type="button" class="product-item__edit-button button">수정</button>
+            <button type="button" class="product-item__delete-button button">삭제</button>
+          </td>
+       </tr>
+      `,
+    );
+  }
+
+  deleteItem(product: Product) {
+    $(`[data-product-id="${product.id}"]`).remove();
+  }
+  ```
+
+- `상품 CRUD`가 일어날때 `상품관리 tab`이 리렌더링되는 방식
+
+<br>
+
+#### validation (UI에서? or Domain에서?)
+
+- Domain에서만
+- UI에서만
+
+<br>
+
+#### css
+
+```css
+#product-control-table td,
+#product-control-table th,
+#charge-control-table td,
+#charge-control-table th {
+  width: 118px;
+  height: 40px;
+  border-top: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
+}
+```
+
+- 다들 비슷하게 공통 부분을 추출해서 적용해주었다. 위처럼 특정 table의 th와 td를 지정해주는 것이 추후 유지보수할 때 좋을 것 같아서 가져왔다.
+
+<br>
+
+#### 자바스크립트 엔진 콜 스택, 메모리 힙의 데이터 저장 구조
 
 https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FwyILC%2Fbtrdon3nQV9%2FyWgZ1qDmEZDwzINEm5dkf1%2Fimg.png
 
+<br>
+
 ## 피드백 정리
 
-### 대분류(ex: 아키텍처, 함수/클래스, 컨벤션, DOM, 테스트 등)
+#### 대분류(ex: 아키텍처, 함수/클래스, 컨벤션, DOM, 테스트 등)
 
 <br>
 
@@ -142,6 +209,8 @@ https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog
   ```
 
   - 현재 미션에서는 크게 문제가 없을거라 생각되지만 태그네임을 기준으로 css를 적용하는건 지양하시는게 좋아요 👀
+
+<br>
 
 - [[#32](https://github.com/woowacourse/javascript-vendingmachine/pull/32/files#r835947796) - dataset 적용을 위한 id 부여]
 
