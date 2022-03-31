@@ -168,14 +168,14 @@
     itemQuantity: number;
   } // -> ItemInfoType
 
-  const var1 = {
+  const var1: A & { isAddMode: boolean } = {
     itemName: "콜라",
     itemPrice: 1000,
     itemQuantity: 20,
     isAddMode: true,
   };
 
-  const var2 = {
+  const var2: Omit<A, "itemQuantity"> = {
     itemName: "콜라",
     itemPrice: 1000,
   };
@@ -192,7 +192,7 @@
 
   // target의 type을 선언하시오
 
-  private focusOnInvalidInput(target: unknown, $inputs: Inputs) {
+  private focusOnInvalidInput(target: keyof ProductInfo, $inputs: Inputs) {
     switch (target) {
       case 'name':
         $inputs.name.focus();
@@ -212,6 +212,7 @@
 
   ```typescript
   // 위의 정답을 통해 $inputs의 타입을 선언하시오.
+  type A = { [P in keyof ProductInfo]: HTMLInputElement };
 
   const $inputs = {
     name: $formElements.namedItem("name") as HTMLInputElement,
@@ -224,8 +225,14 @@
 
   ```typescript
 
+  const coinType = [10,50,100,500];
+  type CoinUnionType = typeof coinType[number];
+
+  type Coins = { [type in CoinUnionType]: number };
+
+
   // coins의 type을 어떻게 선언했나요?
-  const coins = {
+  const coins: Coins = {
     10: 0
     50: 0,
     100: 0,
@@ -238,6 +245,7 @@
   ```typescript
   // 에러를 해결하시오
   $("abc").addEventListener("click", (e) => {
-    console.log(e.target.value); // Property 'value' does not exist on type 'EventTarget'.
+    if (!(e.target instanceof HTMLElement)) return;
+    console.log(e.target.value); // Property 'value' does not exist on type
   });
   ```
