@@ -18,9 +18,123 @@
 
 #### 라우터 구현방법 (라우터 함수?)
 
+- [[#66](https://github.dev/woowacourse/javascript-vendingmachine/pull/66)]
+
+  - Whitelist를 상수로 선언해줘서 허용된 url들을 관리해주었다.
+  - Router 클래스에 싱글톤 패턴을 적용시켜서 해당 클래스를 전역에서 사용해주는 방식으로 해주었다.
+  - url이 바껴야할 때마다 `Router.pushState()`를 호출해주고 이에 따라서 모든 컴포넌트에 `notify()`를 호출해주는 방식으로 라우터를 구현하였다.
+
+    ```javascript
+
+    class Router {
+      static _instance?: Router;
+
+      private listeners: Array<RouteComponent> = [];
+
+      constructor() {
+        if (Router._instance) {
+          return Router._instance;
+        }
+        window.addEventListener('load', this.onLocationChange);
+        window.addEventListener('pushstate', this.onLocationChange);
+        window.addEventListener('popstate', this.onLocationChange);
+      }
+
+      static get instance() {
+        if (!Router._instance) {
+          Router._instance = new Router();
+        }
+        return Router._instance;
+      }
+
+      static pushState(url: string) {
+        history.pushState({}, '', url);
+        window.dispatchEvent(new Event('pushstate'));
+      }
+
+      addListener(component: RouteComponent) {
+        this.listeners.push(component);
+      }
+
+      getCurrentPath() {
+        const { pathname } = window.location;
+        return pathname;
+      }
+
+      isNotFound() {
+        const currentPath = this.getCurrentPath();
+        return Object.keys(WhiteList).every(
+          (key) => WhiteList[key as keyof typeof WhiteList] !== currentPath
+        );
+      }
+
+      onLocationChange = () => {
+        if (this.isNotFound()) {
+          location.href = location.origin;
+          return;
+        }
+        this.notify();
+      };
+
+      notify() {
+        this.listeners.forEach((component) => component.onLocationChange());
+      }
+    }
+
+    export default Router;
+
+
+    ```
+
+- switch문으로 routing
+
+- [#47](https://github.com/woowacourse/javascript-vendingmachine/pull/47)
+
+  ```javascript
+  window.addEventListener('popstate', () => {
+    this.convertTemplate(location.hash || '#product');
+    // ...생략
+  });
+
+  convertTemplate = (path: string) => {
+    const routes = {
+      '#login': () => this.login.render(),
+      '#signup': () => this.signup.render(),
+      '#editMember': () => this.editMember.render(),
+      '#product': () => this.product.render(),
+      '#charge': () => this.charge.render(),
+      '#purchase': () => this.purchase.render(),
+    };
+
+    this.menuTab.render(path);
+    routes[path]();
+  };
+
+  // this.menuTab.render(path)
+  render(path: string) {
+    if (path === "#login" || path === "#signup" || path === "#editMember") {
+      this.vendingmachineHeader.replaceChildren();
+      return;
+    }
+
+    if (this.vendingmachineHeader.children.length === 0) {
+      this.vendingmachineHeader.insertAdjacentHTML(
+        "beforeend",
+        `${this.renderVendingmachineHeader(JSON.parse(localStorage.getItem("USER_NAME")))}`
+      )
+    }
+  }
+  ```
+
 #### api 내부 에러핸들링
 
+- 대부분 `!response.ok`를 활용해서 에러 핸들링을 해주었다.
+
 #### class를 위한 interface 모습?
+
+- interface를 따로 작성하지 않는다.
+- class를 위한 interface를 interface.ts에 모아둔다.
+- class를 위한 interface는 class 선언부 위에 위치시킨다.
 
 ## 피드백 정리
 
