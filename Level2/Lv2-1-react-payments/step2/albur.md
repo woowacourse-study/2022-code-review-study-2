@@ -628,6 +628,245 @@
 
 #### 재사용 컴포넌트는 어느 정도까지의 확장성을 가지고 있을까?
 
+(앨버)
+
+```javascript
+import { memo } from 'react';
+import PropTypes from 'prop-types';
+
+import styled, { css } from 'styled-components';
+
+function Input({ description, margin, placeholder, textAlign, type, value, width, ...props }) {
+  return (
+    <>
+      {description && <Styled.Label>{description}</Styled.Label>}
+      <Styled.Input
+        margin={margin}
+        placeholder={placeholder}
+        textAlign={textAlign}
+        type={type}
+        value={value}
+        width={width}
+        {...props}
+      />
+    </>
+  );
+}
+
+Input.defaultProps = {
+  textAlign: 'center',
+  type: 'text',
+  width: '343px',
+};
+
+Input.propTypes = {
+  description: PropTypes.string,
+  placeholder: PropTypes.string,
+  textAlign: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.string,
+  width: PropTypes.string,
+  onChangeFunc: PropTypes.func,
+};
+
+const Styled = {
+  Input: styled.input`
+    background: #ecebf1;
+    border: none;
+    border-radius: 7px;
+    color: #04c09e;
+    font-size: 18px;
+    height: 45px;
+
+    ::placeholder {
+      color: #737373;
+    }
+
+    ${({ margin, textAlign, width }) => css`
+      margin: ${margin?.t || '0'} ${margin?.r || '0'} ${margin?.b || '0'} ${margin?.l || '0'};
+      text-align: ${textAlign};
+      width: ${width};
+    `}
+  `,
+
+  Label: styled.label`
+    display: block;
+    font-size: 12px;
+    color: #525252;
+    margin-bottom: 3px;
+  `,
+};
+
+export default memo(Input);
+```
+
+<br>
+
+(밧드)
+
+```javascript
+import { forwardRef } from 'react';
+import styled from 'styled-components';
+
+const StyledInput = styled.input`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  background: ${(props) => props.backgroundColor};
+  border-radius: 7px;
+  padding: 5px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 21px;
+  text-align: ${(props) => props.textAlign};
+  color: ${(props) => props.color};
+
+  &:focus {
+    outline-color: ${(props) => (props.isValid ? '#04c09e' : 'red')};
+  }
+`;
+
+const Input = forwardRef(function Input(props, ref) {
+  const {
+    value,
+    name,
+    defaultValue,
+    width,
+    height,
+    type,
+    maxLength,
+    isCenter,
+    placeholder,
+    onChange,
+    backgroundColor,
+    color,
+    isValid,
+    disabled,
+    readonly,
+  } = props;
+
+  return (
+    <StyledInput
+      value={value}
+      name={name}
+      ref={ref}
+      defaultValue={defaultValue}
+      width={width}
+      height={height}
+      type={type}
+      maxLength={maxLength}
+      textAlign={isCenter ? 'center' : 'left'}
+      placeholder={placeholder}
+      backgroundColor={backgroundColor}
+      color={color}
+      onChange={onChange}
+      isValid={isValid}
+      disabled={disabled}
+      readOnly={readonly}
+    />
+  );
+});
+
+Input.defaultProps = {
+  isCenter: true,
+  height: '25px',
+  backgroundColor: '#ecebf1',
+  color: '#04C09E',
+};
+
+export default Input;
+```
+
+<br>
+
+(도리)
+
+```javascript
+import { forwardRef } from 'react';
+import { InputWrapper } from 'components/common/Input/style';
+
+const Input = forwardRef((props, ref) => {
+  const { type, dataset, ...rest } = props;
+  return <InputWrapper type={type ? type : 'text'} data-key={dataset} ref={ref} {...rest} />;
+});
+
+export default Input;
+```
+
+(코이)
+
+```javascript
+import styled from 'styled-components';
+
+const Input = styled.input`
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+  color: ${(props) => props.color || props.theme.colors.MINT};
+  font-size: 18px;
+  font-weight: 500px;
+
+  :focus {
+    outline: none;
+  }
+
+  &[type='number']::-webkit-outer-spin-button,
+  &[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`;
+
+export { Input };
+```
+
+<br>
+
+(빅터)
+
+```javascript
+import styled from 'styled-components';
+
+export const Input = styled.input`
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 21px;
+  text-align: center;
+`;
+
+export const BlockInput = styled(Input)`
+  height: 45px;
+  padding: 12px;
+  background-color: #ecebf1;
+  border-radius: 7px;
+  color: #04c09e;
+
+  &:focus {
+    outline-color: ${(props) => (props.isValid ? '#04c09e' : 'red')};
+  }
+
+  ${(props) => props.style}
+`;
+
+export const UnderlineInput = styled(Input)`
+  padding: 0 0 6px;
+  width: 241px;
+  background-color: #fff;
+  border-bottom: 1.5px solid #737373;
+  color: #383838;
+  border-radius: 0;
+
+  &:focus {
+    outline: none;
+  }
+
+  ${(props) => props.style}
+`;
+```
+
+<br>
+
 ## 피드백 정리
 
 #### 대분류(ex: 아키텍처, 함수/클래스, 컨벤션, DOM, 테스트 등)
