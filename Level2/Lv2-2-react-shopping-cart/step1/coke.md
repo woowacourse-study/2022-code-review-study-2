@@ -1,4 +1,4 @@
-# Level2 페이먼츠 미션 Step2 - 코카콜라
+# Level2 장바구니 미션 Step1 - 코카콜라
 
 - [#65, 코카콜라](https://github.com/woowacourse/react-shopping-cart/pull/65)
 - [#64, 안](https://github.com/woowacourse/react-shopping-cart/pull/64)
