@@ -11,6 +11,98 @@
 [동키콩](https://github.com/woowacourse/react-shopping-cart/pull/82)
 [꼬재](https://github.com/woowacourse/react-shopping-cart/pull/83)
 
+## import 자동 정렬 (여러분의 import문 안녕하신가요?)
+
+### 배경
+
+- 미션을 진행하면서 항상 느끼는 것이 수많은 import문을 매번 수작업으로 정리하는데 시간이 너무 많이 걸린다는 것이었습니다.
+
+- import문을 정렬하지 않고 개발을 진행한다면 아래처럼 될 겁니다.
+
+  ```javascript
+  import { ReactComponent as Cart } from 'assets/cart.svg';
+  import Header from 'components/@shared/Header/Header';
+  import NavigateButton from 'components/@shared/NavigateButton/NavigateButton';
+  import PageTitle from 'components/@shared/PageTitle/PageTitle';
+  import useClickCartButton from 'hooks/useClickCartButton';
+  import ProductDetailPage from 'pages/ProductDetailPage/ProductDetailPage';
+  import ShoppingCartPage from 'pages/ShoppingCartPage/ShoppingCartPage';
+  import React, { useState } from 'react';
+  import { Routes, Route, useNavigate } from 'react-router-dom';
+  import { fetchCartsError } from 'redux/carts/carts.action';
+  import styled from 'styled-components';
+  ```
+
+- 또한, 미션에서 정한 자기만의 import 정렬에 대한 컨벤션이 있다면, 해당 컨벤션을 지켜가면서, 또 까먹으면 이전에 만들었던 컴포넌트에 가서 import를 어떻게 정렬했는지 보고 상기해서 정렬해주었습니다.
+- 이러다 보니, 매번 수동으로 정렬하는 import를 자동으로 해줄 수는 없을까라는 생각을 하게 되었습니다.
+
+### 방법 (prettier 사용)
+
+- import를 해줄 수 있는 방법을 여러개 찾을 수 있었습니다.
+
+  - eslint 활용
+  - prettier 활용
+  - 등등
+
+- 이 중에서 `prettier`를 활용해주는 방식을 사용했었습니다.
+
+https://github.com/trivago/prettier-plugin-sort-imports
+
+```
+npm install --save-dev @trivago/prettier-plugin-sort-imports
+```
+
+```json
+{
+  "importOrder": [
+    "^(@|pages)(.*|$)",
+    "^(@|components/@shared)(.*|$)",
+    "^(@|components)(.*|$)",
+    "^(@|redux/)(.*|$)",
+    "^(@|hooks)(.*|$)",
+    "^(@|styles)(.*|$)",
+    "^(@|(assets|constants|utils|api))(.*|$)"
+  ],
+  "importOrderSeparation": true
+}
+```
+
+### 결과
+
+```javascript
+import React, { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+import ProductDetailPage from 'pages/ProductDetailPage/ProductDetailPage';
+import ShoppingCartPage from 'pages/ShoppingCartPage/ShoppingCartPage';
+
+import Header from 'components/@shared/Header/Header';
+import NavigateButton from 'components/@shared/NavigateButton/NavigateButton';
+import PageTitle from 'components/@shared/PageTitle/PageTitle';
+
+import { fetchCartsError } from 'redux/carts/carts.action';
+
+import useClickCartButton from 'hooks/useClickCartButton';
+
+import { ReactComponent as Cart } from 'assets/cart.svg';
+```
+
+### 근데, 일일이 파일에 들어가서 save를 해주면서 적용해줘야하나?
+
+```json
+// package.json
+scripts: {
+  "pretty": "prettier --write \"src/**/*.{js,jsx,json}\""
+}
+```
+
+```shell
+npm run pretty
+```
+
+위의 명령어를 사용해서 전체 파일에 적용을 해줄 수 있다. `\"src/**/*.{js,jsx,json}\"`은 경로내 파일들을 지칭해주기 때문에 커스터마이징 해주면 된다.
+
 ## 피드백 정리
 
 #### 대분류(ex: 아키텍처, 함수/클래스, 컨벤션, DOM, 테스트 등)
