@@ -1,4 +1,4 @@
-# Leve2-1 React-payments Step1 - 앨버
+# Leve2-1 React-payments Step2 - 앨버
 
 - 분석 담당 코드
 
