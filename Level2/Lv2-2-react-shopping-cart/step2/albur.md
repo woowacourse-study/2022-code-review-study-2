@@ -123,13 +123,13 @@
 
   // 사용처 - after
   function Component() {
-    const { handleUpStockButton } = useCart();
+    const { handleUpStockButton } = useCart(cartId);
 
     const someFunction = () => handleUpStockButton(cart);
   }
 
   function AnotherComponent() {
-    const { handleUpStockButton } = useCart();
+    const { handleUpStockButton } = useCart(cartId);
 
     const someFunction = () => handleUpStockButton(cart);
   }
