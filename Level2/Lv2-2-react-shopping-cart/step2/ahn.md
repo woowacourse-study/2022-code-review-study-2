@@ -17,7 +17,8 @@
 
 1. 상품 체크 상태를 저장한다
 2. 장바구니 페이지에 오면 자동으로 모든 상품을 체크한다
-   <br>
+
+<br>
 
 - useEffect dependency eslint 경고
 
@@ -213,7 +214,7 @@ grey_700: "#333333",
 
 [#129](https://github.com/woowacourse/react-shopping-cart/pull/129#discussion_r882964884)
 
-- 최적화 아티클
+- 앨버를 위한 최적화 아티클
 
 <br>
 
